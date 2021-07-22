@@ -20,26 +20,36 @@ function addTestUsers(testuser) {
 
 }
 
-function deleteTestUsers(testuserId, _deleteUsersCallback) {
-    
+function deleteTestUsers(testusersToDelete, _deleteUsersCallback) {
+ 
     refreshToken((token)=>{
-        superagent.delete(`${process.env.ISSUER_BASE_URL}/api/v2/users/`)
-        .field(':id', `${testuserId}`)
-        .set('authorization', `Bearer ${token}`)
-        .end((err, res) => {
-                if (err) {
-    
-                    _deleteUsersCallback(err)
-                    
-                }
-                else{
-                    _deleteUsersCallback(' successfully deleted...')
-                }
-      
-        })
+        do {
+            var testuserId = testusersToDelete.pop()
+
+                superagent.delete(`${process.env.ISSUER_BASE_URL}/api/v2/users/`)
+                .field(':id', `${testuserId}`)
+                .set('authorization', `Bearer ${token}`)
+                .end((err, res) => {
+                        if (err) {
+                            _deleteUsersCallback(err)
+                        }
+                        else{
+                            handleRate(res.body)
+                            _deleteUsersCallback(' successfully deleted...')
+                        }
+            })
+        } while (typeof testuserId !== 'undefined');
+
+        
     })
 
 }
+function handleRate(body){
+    /* if (body.X-RateLimit-Remaining==0) {    
+        wait for  X-RateLimit-Reset seconds
+    } */
+}
+
 function getAllUsers(_callback){
     
     refreshToken((token)=>{
