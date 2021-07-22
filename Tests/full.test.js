@@ -1,15 +1,15 @@
 
-const setupUsers = require('../Helpers/setupHelper.js')
+const {setupUsers} = require('../Helpers/setupHelper.js')
 
-const teardownUsers = require('../Helpers/teardownHelper.js')
+const {teardownUsers} = require('../Helpers/teardownHelper.js')
 
 
 beforeAll(() => {
-    setupUsers()
+    setupUsers(2)
   });
   
   afterAll(() => {
-    teardownUsers()
+    teardownUsers(()=>{})
   });
    
   

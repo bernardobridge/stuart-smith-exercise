@@ -1,22 +1,46 @@
-const addTestUsers = require('./Helpers/userHelper.js')
-const testuser = require('./Models/user.json')
+const {teardownUsers} = require('./Helpers/teardownHelper')
+teardownUsers()
 
-require('dotenv').config();
+/* const { serialize } = require('superagent')
+const {getAllUsers} = require('./Helpers/userHelper.js')
+const {deleteTestUsers} = require('./Helpers/userHelper.js')
+const {addTestUsers} = require('./Helpers/userHelper.js')
 
-testuser.email = 'XXXXX@1.com'
-testuser.name = 'XXXXheres another test'
-testuser.nickname = 'XXmy nick name'
-testuser.family_name = 'XXmy family name'
-testuser.given_name = 'XXgiven name test'
+var faker = require('faker');
 
-addTestUsers(testuser)
+class User{
+    constructor(){
+        this.connection = "Username-Password-Authentication",
+        this.name = faker.name.findName(),
+        this.given_name = faker.name.firstName(),
+        this.family_name = faker.name.lastName(),
+        this.nickname = faker.name.firstName(),
+        this.email = faker.internet.email(),
+        this.password = faker.internet.password(),
+        this.user_metadata = {
+            "phone_number_verified": false,
+            "locale": "",
+            "zoneinfo": "",
+            "gender": "",
+            "birthdate": "",
+            "phone_number": "",
+            "middle_name": ""
+        },
+        this. email_verified = true,
+        this.app_metadata =  {}
+    }
 
-//deleteTestUsers(testuser)
-
-/*
-for (let index = 1; index < 10; index++) {
-    testuser.email = index+testuser.email
-    testuser.name = index+testuser.name
-    addTestUsers(testuser)
 }
-*/
+
+for (let index = 0; index < 3; index++) {
+    let myUser = new User()
+
+    addTestUsers(myUser)    
+}
+
+
+
+
+
+
+ */
