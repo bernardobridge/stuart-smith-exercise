@@ -13,7 +13,9 @@ TODO
 
 ## Test project plan document
 
-[PDF Containing project plan](Documents/Search Engine Test Plan.pdf)
+[PDF  project plan](https://github.com/stuartvansmith/stuart-smith-exercise/blob/66d079776a5e1d3528cf42eb945e7faed41a0e4e/Documents/Search%20Engine%20Test%20Plan.pdf)
+
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
