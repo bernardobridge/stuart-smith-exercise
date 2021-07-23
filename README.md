@@ -13,7 +13,7 @@ TODO
 
 ## Test project plan document
 
-[PDF Containing project plan](Documents/Search&#32Engine&#32Test&#32Plan.pdf)
+[PDF Containing project plan](Documents/Search Engine Test Plan.pdf)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
