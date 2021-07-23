@@ -13,15 +13,8 @@ nodeJS testing framework
 TODO
 1. Setup helper to return array of users to the test
 2. Add test to Smoke suite to do simple search on email
-3. Add tests Medium suite to search for:
-		Valid user by email with and without wildcard
-		Invalid user by email with and without wildcard
-
-4. Add	tests to Full suite to:
-		Search valid user by user_metadata
-		Exceed rate and validate response
-		Search with malformed query and validate response
-
+3. Add tests Medium suite to search for: Valid user by email with and without wildcard. Invalid user by email with and without wildcard
+4. Add	tests to Full suite to: Search valid user by user_metadata. Exceed rate and validate response. Search with malformed query and validate response.
 5. User deletion handleRate() function to be completed. Need to find X-RateLimit-Reset value and/or investigate the superagent throttle function
 6. Replace check local and store local functions with a cookie function built in to superagent
 
