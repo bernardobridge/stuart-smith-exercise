@@ -11,7 +11,9 @@ TODO
 4. Move user class from setupHelper and export from userClass.js
 5. Decompose helpers to smaller single responsibiliy functions to make extensible for example using strategy patten.
 
+## Test project plan document
 
+[PDF Containing project plan](Documents/Search&#32Engine&#32Test&#32Plan.pdf)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
