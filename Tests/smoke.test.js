@@ -9,15 +9,14 @@ beforeAll(() => {
   });
   
   afterAll(() => {
-    teardownUsers(()=>{})
+   // teardownUsers(()=>{})
   });
 
-describe('Smoke Tests',()=>{
+
     test('test one', () => {
         console.log('smoke test one')
     });
     test('test two', () => {
         console.log('smoke test two')
     });
-})
-  
+

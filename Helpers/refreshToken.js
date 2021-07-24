@@ -46,9 +46,7 @@ function storeLocalToken(output){
         if (err) {
              console.log(err);
         }
-        else{
-            console.log('Hello World > helloworld.txt');
-        }
+
      });
 }
 
