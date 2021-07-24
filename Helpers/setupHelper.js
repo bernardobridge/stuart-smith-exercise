@@ -19,18 +19,28 @@ class User{
             "phone_number": "",
             "middle_name": ""
         },
-        this. email_verified = true,
+        this.email_verified = true,
         this.app_metadata =  {}
     }
 
 }
 
-
-function setupUsers (numberOfUsers){
+function setupUsers (numberOfUsers, _callback){
+    let usrs = []  
     for (let index = 0; index < numberOfUsers; index++) {
         let myUser = new User()
-        addTestUsers(myUser)    
+        addTestUsers(myUser, (err, testUser)=>{
+            if (err) {
+                throw err
+            }
+            else{
+                _callback(testUser)
+                
+            }
+        })    
+        
     }
+   
 }
 
 module.exports = {setupUsers}

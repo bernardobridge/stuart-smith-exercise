@@ -4,7 +4,7 @@ fs = require('fs');
 
 process.env.CLIENT_SECRET
 
-const body = {client_id : `"${process.env.CLIENT_ID}"` ,client_secret :`"${process.env.CLIENT_SECRET}"`,audience:"https://dev-5zxjin17.eu.auth0.com/api/v2/",grant_type:"client_credentials"}
+const body = {client_id : `${process.env.CLIENT_ID}` ,client_secret :`${process.env.CLIENT_SECRET}`,audience:"https://dev-5zxjin17.eu.auth0.com/api/v2/",grant_type:"client_credentials"}
 
 
 function refreshToken(_callback) {
@@ -34,10 +34,10 @@ function refreshToken(_callback) {
 function checkLocalToken(_callback){
     var token = JSON.parse(fs.readFileSync('storedtoken', 'utf8'));
     var expireDate = new Date(parseInt(token.expires_in)+parseInt(token.dateStored))
-    if (expireDate< new Date() ) {
+    if (expireDate > new Date() ) {
         _callback(token.access_token)    
     }
- 
+   _callback()
 }
 
 function storeLocalToken(output){

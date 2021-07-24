@@ -6,7 +6,7 @@ const {teardownUsers} = require('../Helpers/teardownHelper.js')
 
 
 beforeAll(() => {
-    setupUsers(2)
+    //setupUsers(2)
   });
   
   afterAll(() => {

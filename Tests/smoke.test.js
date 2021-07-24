@@ -1,22 +1,33 @@
 
 const {setupUsers} = require('../Helpers/setupHelper.js')
-
+const {searchUsers} = require('../Helpers/userHelper.js')
 const {teardownUsers} = require('../Helpers/teardownHelper.js')
 
+let testUsers = []
 
-beforeAll(() => {
-    setupUsers(1)
+beforeAll(done => {
+  function callback(usrs) {
+    testUsers.push(usrs)
+    done()
+  }
+    setupUsers(1, callback)
   });
-  
+
+ 
   afterAll(() => {
    // teardownUsers(()=>{})
   });
 
+  test('test one', done => {
+      function callback(body){
+        try {
+          expect(body[0].name).toBe(testUsers[0].name)
+          done();
+        } catch (error) {
+          done(error);
+        }
+      }
 
-    test('test one', () => {
-        console.log('smoke test one')
-    });
-    test('test two', () => {
-        console.log('smoke test two')
-    });
+      searchUsers(`q=name:"${testUsers[0].name}"`, callback)
+    })
 

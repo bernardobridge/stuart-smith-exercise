@@ -4,7 +4,7 @@ require('dotenv').config();
 const refreshToken = require('./refreshToken')
 
 
-function addTestUsers(testuser) {
+function addTestUsers(testuser, _callback) {
    
     refreshToken((token)=>{
         superagent.post(`${process.env.ISSUER_BASE_URL}/api/v2/users`)
@@ -13,7 +13,10 @@ function addTestUsers(testuser) {
         .set('content-type', 'application/json')
         .end((err, res) => {
                 if (err) {
-                    console.log(err)
+                    _callback(err, res.body)
+                }
+                else{
+                    _callback(err, res.body)
                 }
         })
     })
@@ -49,7 +52,24 @@ function handleRate(body){
         wait for  X-RateLimit-Reset seconds
     } */
 }
-
+function searchUsers(query, _callback){
+    
+    refreshToken((token)=>{
+        
+        superagent.get(`${process.env.ISSUER_BASE_URL}/api/v2/users`)
+        .set('authorization',`Bearer ${token}` )
+        .set('search_engine','v3')
+        .query(query)
+        .end((err, res)=>{
+            if (err) {
+                console.log(err)
+            }
+            else{
+                _callback(res.body)
+            }
+        })      
+    })
+}
 function getAllUsers(_callback){
     
     refreshToken((token)=>{
@@ -66,4 +86,4 @@ function getAllUsers(_callback){
         })      
     })
 }
-module.exports = { getAllUsers, deleteTestUsers, addTestUsers}
+module.exports = { getAllUsers, deleteTestUsers, addTestUsers, searchUsers}
