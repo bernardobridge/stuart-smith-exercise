@@ -6,7 +6,7 @@
   "module": "CommonJS",
   "scripts": {
     "test": "jest --config jest.config.json",
-    "doc" : "jsdoc -c jsdoc.json"
+    "doc" : "jsdoc -c jsdoc.json readme.md"
   },
   "keywords": [],
   "author": "",

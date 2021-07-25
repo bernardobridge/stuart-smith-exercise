@@ -4,7 +4,7 @@
 
 nodeJS testing framework
 
- The documentation for this framework can be found here [Documentation](https://github.com/stuartvansmith/stuart-smith-exercise/blob/57eee4664c564cfd98e565c359463f5e0d25bfa6/docs/index.html)
+ The documentation for this framework can be found here [Documentation](docs/index.html)
   
 
 ## TODO
