@@ -613,7 +613,7 @@ exports.publish = (taffyData, opts, tutorials) => {
     files = find({kind: 'file'});
     packages = find({kind: 'package'});
 
-    generate('stuart-smith-exercise',
+    generate('',
         packages.concat(
             [{
                 kind: 'mainpage',
