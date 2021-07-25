@@ -26,6 +26,40 @@ TODO
 10. Decompose helpers to smaller single responsibiliy functions to make extensible for example using strategy patten. -- NOT RELEVANT
 11. Implement auth0 SDK -- DONE
 12. Implement jsdocs -- IN PROGRESS
+13. Tests that would be included if time allowed
+
+# BASIC SEARCH
+search for a valid user  with and without wildcard. For each of these fields:
+name
+nickname
+email
+email_verified
+given_name
+family_name
+
+
+# QUERY SYNTAX
+search using  NOT AND 
+For inclusive ranges use square brackets: [min TO max].
+For exclusive ranges use curly brackets: {min TO max}.
+Curly and square brackets can be combined in the same range expression: logins_count:[100 TO 200}.
+Use ranges in combination with wildcards. For example, to find all users with more than 100 logins, use q=logins_count:{100 TO *].
+
+Repeat with a user that does not exist with and without wildcard
+# METADATA
+Search valid user by user_metadata fields. 
+Search Invalid user by user_metadata fields. 
+
+
+# PERFORMANCE, LOAD 
+Exceed rate limit and validate response. 
+Search with malformed query and validate response.
+search with a malform URL and validate response.
+
+# SECURITY
+SQL query injection
+Brute force attack
+
   
 
 ## Test project plan document
