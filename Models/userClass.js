@@ -5,7 +5,7 @@ var faker = require('faker');
 
 export class user{
     constructor(){
-        this.connection = "Username-Password-Authentication",
+    this.connection = "New-connection-db",
 	this.name = faker.name.findName(),
 	this.given_name = faker.given_name(),
 	this.family_name = faker.family_name(),

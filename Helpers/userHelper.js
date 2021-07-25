@@ -1,5 +1,6 @@
 
 const superagent = require('superagent');
+const { auth0 } = require('./auth0ManagementClientHelper');
 require('dotenv').config();
 const refreshToken = require('./refreshToken')
 
@@ -24,29 +25,39 @@ function addTestUsers(testuser, _callback) {
 }
 
 function deleteTestUsers(testusersToDelete, _deleteUsersCallback) {
- 
-    refreshToken((token)=>{
-        do {
+    var successfullyDeleted = []
+    var failedToDelete = []
+    var rejectedReason = []
+    function _success(msg){
+            successfullyDeleted.push(msg)
+    }
+    
+    function _failure(msg){
+            failedToDelete.push(msg)
+    }
+    function _rejected(reason){
+            rejectedReason.push(reason)
+    }
+    do {
             var testuserId = testusersToDelete.pop()
-
-                superagent.delete(`${process.env.ISSUER_BASE_URL}/api/v2/users/`)
-                .field(':id', `${testuserId}`)
-                .set('authorization', `Bearer ${token}`)
-                .end((err, res) => {
-                        if (err) {
-                            _deleteUsersCallback(err)
-                        }
-                        else{
-                            handleRate(res.body)
-                            _deleteUsersCallback(' successfully deleted...')
-                        }
-            })
-        } while (typeof testuserId !== 'undefined');
-
-        
-    })
-
+            if (typeof testuserId !== 'undefined') {
+                    auth0.deleteUser({ id: testuserId }, function (err){
+                            if (err) {
+                              _failure(testuserId)       
+                            }
+                            else{
+                             _success(testuserId)
+                            }
+                             
+                    })
+                    
+            }
+            
+    } while (typeof testuserId !== 'undefined');
+    
+    _deleteUsersCallback()
 }
+
 function handleRate(body){
     /* if (body.X-RateLimit-Remaining==0) {    
         wait for  X-RateLimit-Reset seconds

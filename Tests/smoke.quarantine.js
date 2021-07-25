@@ -10,15 +10,20 @@ beforeAll(done => {
     testUsers.push(usrs)
     done()
   }
+  try {
+    teardownUsers(()=>{})
+  } catch (error) {
+    
+  }
     setupUsers(1, callback)
   });
 
  
   afterAll(() => {
-   // teardownUsers(()=>{})
+   teardownUsers(()=>{})
   });
 
-  test('test one', done => {
+  test('Smoke Test', done => {
       function callback(body){
         try {
           expect(body[0].name).toBe(testUsers[0].name)

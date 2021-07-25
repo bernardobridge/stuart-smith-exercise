@@ -1,31 +1,104 @@
 const {teardownUsers} = require('./Helpers/teardownHelper')
-const {getAllUsers} = require('./Helpers/userHelper')
-const {deleteTestUsers} = require('./helpers/userHelper')
+const {deleteTestUsers} = require('./Helpers/userHelper')
 const refreshToken = require('./Helpers/refreshToken')
 
-var usrs = ['auth0|60f94d918a1c060068964ab3']
 
-
-const superagent = require('superagent');
-require('dotenv').config();
-fs = require('fs');
-
-process.env.CLIENT_SECRET
-
-const body = {client_id : `${process.env.CLIENT_ID}` ,client_secret :`${process.env.CLIENT_SECRET}`,audience:"https://dev-5zxjin17.eu.auth0.com/api/v2/",grant_type:"client_credentials"}
+const {auth0} = require('./Helpers/auth0ManagementClientHelper')
 
 
 
-superagent.post(`${process.env.ISSUER_BASE_URL}/oauth/token`)
-.set('content-type', 'application/json')
-.send(body)
-.end((err, res) => {
-        if (err) {
-        console.log(err)
-        }
-        else{
-            let output = JSON.parse(res.text)
-            storeLocalToken(output)
-           _callback(output.access_token)
-        }
+function xteardownUsers (_callback) {
+    var params = {
+        search_engine: 'v3',
+        per_page: 100,
+        page: 0
+      };
+      auth0.getUsers(params, function (err, users) {
+              if (users) {
+                for (let index = 0; index < users.length; index++) {
+                        const element = users[index];
+                        deleteTestUsers(element.user_id)           
+                }        
+              }
+              else{
+                      _callback('no users')
+              }
+              
+
+      });
+
+}
+
+xteardownUsers((message)=>{
+        console.log(message)
 })
+
+
+
+
+/* const {auth0} = require('./helpers/auth0ManagementClientHelper')
+
+var testusersToDelete = [ 'auth0|60fd422577bbb500702da359']
+
+var successfullyDeleted = []
+var failedToDelete = []
+var rejectedReason = []
+function _success(msg){
+        successfullyDeleted.push(msg)
+}
+
+function _failure(msg){
+        failedToDelete.push(msg)
+}
+function _rejected(reason){
+        rejectedReason.push(reason)
+}
+
+function deleteTestUsers(testusersToDelete, _deleteUsersCallback) {
+ 
+        do {
+                var testuserId = testusersToDelete.pop()
+                if (typeof testuserId !== 'undefined') {
+                        auth0.deleteUser({ id: testuserId }, function (err){
+                                if (err) {
+                                  _failure(testuserId)       
+                                }
+                                else{
+                                 _success(testuserId)
+                                }
+                                 
+                        })
+                        
+                }
+                
+        } while (typeof testuserId !== 'undefined');
+        
+        _deleteUsersCallback()
+}
+deleteTestUsers(testusersToDelete, ()=>{
+        
+        console.log(successfullyDeleted)
+        console.log(failedToDelete)
+        console.log(rejectedReason)
+})
+ */
+/*     
+function success(body){
+        try {
+          console.log(body[0].name)
+        } catch (error) {
+          console.log(error)
+        }            
+      }  
+    
+    function failure(message){
+      console.log(message)
+    }
+    var params = {
+        search_engine: 'v3',
+        q: `name:"Stuart Smith"`,
+        per_page: 10,
+        page: 0
+      };
+
+auth0.getUsers(params).then(success).catch(failure) ; */

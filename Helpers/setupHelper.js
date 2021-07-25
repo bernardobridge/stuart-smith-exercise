@@ -1,9 +1,10 @@
+const {auth0} = require('../helpers/auth0ManagementClientHelper')
 const {addTestUsers} = require('./userHelper.js')
 var faker = require('faker');
 
 class User{
     constructor(){
-        this.connection = "Username-Password-Authentication",
+        this.connection = "New-connection-db",
         this.name = faker.name.findName(),
         this.given_name = faker.name.firstName(),
         this.family_name = faker.name.lastName(),
@@ -25,6 +26,22 @@ class User{
 
 }
 
+function auth0CreateUsers(numberOfUsers, _callback){
+    let usrs = []  
+    
+        let myUser = new User()
+
+         auth0.createUser(myUser, (err, testUser)=>{
+            if (err) {
+                throw err
+            }
+            else{
+                usrs.push(testUser)
+                _callback(usrs)
+            }
+         })    
+}
+
 function setupUsers (numberOfUsers, _callback){
     let usrs = []  
     for (let index = 0; index < numberOfUsers; index++) {
@@ -43,4 +60,4 @@ function setupUsers (numberOfUsers, _callback){
    
 }
 
-module.exports = {setupUsers}
+module.exports = {setupUsers, auth0CreateUsers }
