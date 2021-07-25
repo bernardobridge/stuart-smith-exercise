@@ -28,7 +28,7 @@ TODO
 12. Implement jsdocs -- IN PROGRESS
 13. Tests that would be included if time allowed
 
-# BASIC SEARCH
+# Basic search
 search for a valid user  with and without wildcard. For each of these fields:
 name
 nickname
@@ -38,7 +38,7 @@ given_name
 family_name
 
 
-# QUERY SYNTAX
+# Query syntax and operators
 search using  NOT AND 
 For inclusive ranges use square brackets: [min TO max].
 For exclusive ranges use curly brackets: {min TO max}.
@@ -46,17 +46,17 @@ Curly and square brackets can be combined in the same range expression: logins_c
 Use ranges in combination with wildcards. For example, to find all users with more than 100 logins, use q=logins_count:{100 TO *].
 
 Repeat with a user that does not exist with and without wildcard
-# METADATA
+# Metadata searches
 Search valid user by user_metadata fields. 
 Search Invalid user by user_metadata fields. 
 
 
-# PERFORMANCE, LOAD 
+# Performance & Load
 Exceed rate limit and validate response. 
 Search with malformed query and validate response.
 search with a malform URL and validate response.
 
-# SECURITY
+# Stability & availablility
 SQL query injection
 Brute force attack
 
