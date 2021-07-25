@@ -5,7 +5,8 @@
   "main": "app.js",
   "module": "CommonJS",
   "scripts": {
-    "test": "jest --config jest.config.json"
+    "test": "jest --config jest.config.json",
+    "doc" : "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "faker": "^5.5.3",
     "jest": "^27.0.6",
     "jest-html-reporter": "^3.4.1",
+    "jsdoc": "^3.6.7",
     "superagent": "^6.1.0"
   }
 }

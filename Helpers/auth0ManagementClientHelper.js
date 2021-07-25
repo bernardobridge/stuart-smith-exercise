@@ -1,7 +1,10 @@
 require('dotenv').config();
 var ManagementClient = require('auth0').ManagementClient;
 
-
+/**
+ * ManagementClient from the auth0 npm 
+ * @type {ManagementClient}
+ */
 var auth0 = new ManagementClient({
   domain: `${process.env.CLIENT_DOMAIN}`,
   clientId: `${process.env.CLIENT_ID}`,

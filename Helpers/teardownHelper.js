@@ -1,7 +1,10 @@
 const {auth0} = require('./auth0ManagementClientHelper')
 const {deleteTestUsers} = require('./userHelper')
 
-
+/**
+ * Function to be delete all users in the connection DB
+ * @param {function} _callback 
+ */
 function teardownUsers (_callback) {
     var params = {
         search_engine: 'v3',

@@ -2,7 +2,10 @@ const testuser = require('./user')
 var faker = require('faker');
 
 
-
+/**
+ * a test user class with properties populated using faker
+ * @deprecated (See {@link User})
+ */
 export class user{
     constructor(){
     this.connection = "New-connection-db",
