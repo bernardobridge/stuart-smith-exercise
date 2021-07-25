@@ -95,8 +95,9 @@ function searchUsers(query, _callback){
 }
 
 /**
- * 
- * @param {*} _callback 
+ * Return json containing all users from the connection DB
+ * @param {function} _callback 
+ * @deprecated This function will be deleted. Please use auth0 ManagementClient directly from the helper. (See {@link auth0})
  */
 function getAllUsers(_callback){
     
