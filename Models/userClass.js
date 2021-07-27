@@ -21,7 +21,7 @@ export class user{
 		"zoneinfo": "",
 		"gender": "",
 		"birthdate": "",
-		"phone_number": "",
+		"phone_number": faker.internet.phone_number(),
 		"middle_name": ""
 	},
 	this. email_verified = true,

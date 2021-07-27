@@ -1,51 +1,95 @@
-
 const {setupUsers, auth0CreateUsers} = require('../Helpers/setupHelper.js')
-const {searchUsers} = require('../Helpers/userHelper.js')
-const {teardownUsers} = require('../Helpers/teardownHelper.js')
+const {storeSetupData, loadSetupData} = require('../Helpers/dataHelper.js')
 const {auth0} = require('../helpers/auth0ManagementClientHelper')
 
-let testUsers = []
+beforeAll(()=>{
+    auth0CreateUsers(3).then((newUsers)=>{
+        storeSetupData(newUsers, 'mediumTest')
+       })
+     
+});
 
-beforeAll(done => {
-  function callback(usrs) {
-    testUsers = usrs
-    done()
-  }
-  try {
-    teardownUsers(()=>{})
-  } catch (error) {
-    
-  }
-    auth0CreateUsers(1, callback)
-  });
 
- 
-  afterAll(() => {
-    teardownUsers(()=>{})
-  });
- 
 
-    test('Search for user by name', () => {
+test('Search by Name', () => {
+    loadSetupData('mediumTest',(usrs)=>{
+        
+        console.log(`1 - test with ${usrs[0].name}`)
+        var params = { search_engine: 'v3', q: `name:"${usrs[0].name}"`}
 
-      function success(body){
-          try {
-            expect(body[0].name).toBe(testUsers[0].name)
-          } catch (error) {
-            throw error
-          }            
-        }  
-      
-      function failure(message){
-        console.log(message)
-      }
-      var params = {
-        search_engine: 'v3',
-        q: `name:"${testUsers[0].name}"`,
-        per_page: 10,
-        page: 0
-      };
-      
-      auth0.getUsers(params).then(success).catch(failure) ;
-    });
-    
+        function failure(message){
+          console.log(message)
+        }
 
+        auth0.getUsers(params).then((body)=>{
+            expect(body[0].name).toBe(usrs[0].name)
+        }).catch(failure)
+
+    })
+});
+
+test('Search by Email', () => {
+    loadSetupData('mediumTest',(usrs)=>{
+        
+        console.log(`2 - test with ${usrs[0].name}`)
+        var params = { search_engine: 'v3', q: `email:"${usrs[0].email}"`}
+
+        function failure(message){
+          console.log(message)
+        }
+
+        auth0.getUsers(params).then((body)=>{
+            expect(body[0].name).toBe(usrs[0].name)
+        }).catch(failure)
+
+    })
+});
+
+test('Search by nickname', () => {
+    loadSetupData('mediumTest',(usrs)=>{
+        
+        console.log(`3 - test with ${usrs[0].name}`)
+        var params = { search_engine: 'v3', q: `nickname:"${usrs[0].nickname}"`}
+
+        function failure(message){
+          console.log(message)
+        }
+
+        auth0.getUsers(params).then((body)=>{
+            expect(body[0].name).toBe(usrs[0].name)
+        }).catch(failure)
+
+    })
+});
+test('Search by Given Name', () => {
+    loadSetupData('mediumTest',(usrs)=>{
+        
+        console.log(`3 - test with ${usrs[0].name}`)
+        var params = { search_engine: 'v3', q: `given_name:"${usrs[0].given_name}"`}
+
+        function failure(message){
+          console.log(message)
+        }
+
+        auth0.getUsers(params).then((body)=>{
+            expect(body[0].name).toBe(usrs[0].name)
+        }).catch(failure)
+
+    })
+});
+test('Search by Family Name', () => {
+    loadSetupData('mediumTest',(usrs)=>{
+        
+        console.log(`3 - test with ${usrs[0].name}`)
+        var params = { search_engine: 'v3', q: `family_name:"${usrs[0].family_name}"`}
+
+        function failure(message){
+          console.log(message)
+        }
+
+        auth0.getUsers(params).then((body)=>{
+            expect(body[0].name).toBe(usrs[0].name)
+        }).catch(failure)
+
+    })
+});

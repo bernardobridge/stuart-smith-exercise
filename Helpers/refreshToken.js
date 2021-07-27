@@ -38,7 +38,7 @@ function refreshToken(_callback) {
 /**
  * load cookie containing current access_token from root folder
  * @param {function} _callback 
- * @deprecated this is only called by superagent. You should use auth0. (See: {@link auth0})
+ * @deprecated this is only called by superagent. You should use auth0 management client. (See: {@link auth0})
  */
 function checkLocalToken(_callback){
     var token = JSON.parse(fs.readFileSync('storedtoken', 'utf8'));

@@ -93,7 +93,23 @@ function searchUsers(query, _callback){
         })      
     })
 }
-
+function apiAvalailable(_callback){
+    
+    refreshToken((token)=>{
+        
+        superagent.get(`${process.env.ISSUER_BASE_URL}/api/v2/users`)
+        .set('authorization',`Bearer ${token}` )
+        .set('search_engine','v3')
+        .end((err, res)=>{
+            if (err) {
+                console.log(err)
+            }
+            else{
+                _callback(res.status)
+            }
+        })      
+    })
+}
 /**
  * Return json containing all users from the connection DB
  * @param {function} _callback 
@@ -115,4 +131,4 @@ function getAllUsers(_callback){
         })      
     })
 }
-module.exports = { getAllUsers, deleteTestUsers, addTestUsers, searchUsers}
+module.exports = { getAllUsers, deleteTestUsers, addTestUsers, searchUsers, apiAvalailable}

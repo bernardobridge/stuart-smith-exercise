@@ -21,7 +21,7 @@ class User{
             "zoneinfo": "",
             "gender": "",
             "birthdate": "",
-            "phone_number": "",
+            "phone_number": faker.phone.phoneNumber(),
             "middle_name": ""
         },
         this.email_verified = true,
@@ -33,23 +33,29 @@ class User{
 /**
  * Create and add the required number of test users
  * @param {number} numberOfUsers 
- * @param {function} _callback 
- */
-function auth0CreateUsers(numberOfUsers, _callback){
-    let usrs = []  
-    
-        let myUser = new User()
+  */
+function auth0CreateUsers(numberOfUsers){
+    return new Promise(function (resolve, reject){
+        let usrs = []  
+        let error = ''
+        function final(newUser){
+            usrs.push(newUser)
+            if (usrs.length==numberOfUsers) {
+                resolve(usrs)
+            }
+        }
 
-         auth0.createUser(myUser, (err, testUser)=>{
-            if (err) {
-                throw err
-            }
-            else{
-                usrs.push(testUser)
-                _callback(usrs)
-            }
-         })    
+        for (let index = 0; index < numberOfUsers; index++) {
+            let myUser = new User()
+            auth0.createUser(myUser).then(final).catch((err) =>{
+                console.log(err)
+            })
+        }
+
+    })
+      
 }
+
 
 /**
  * Create and add the required number of test users
